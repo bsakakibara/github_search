@@ -1,7 +1,7 @@
-const Error = () => {
+const Error = ({message}: {message?: string}) => {
   return (
     <div>
-        <p>Usuário não encontrado</p>
+        <p>{message || "Ocorreu um erro"}</p>
     </div>
   )
 }

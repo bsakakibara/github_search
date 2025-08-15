@@ -7,12 +7,16 @@ const DataUser = ({
     avatar_url,
     followers,
     following,
+    email,
+    bio
 }: TypesProps) => {
     return (
-        <div>DataUser
+        <div>
             <img src={avatar_url} alt={login} />
             <h3>{login}</h3>
-            <p>{location}</p>
+            {location && <p>Localização: {location}</p>}
+            {email && <p>Email: {email}</p>}
+            {bio && <p>Bio: {bio}</p>}
             <p>Seguidores: {followers}</p>
             <p>Seguindo: {following}</p>
         </div>

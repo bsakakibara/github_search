@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-import { createBrowserRouter,  RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './routes/Home.tsx'
+import RepoDetails from './components/RepoDetails.tsx'
+import { UserProvider } from './context/UserContext.tsx'
 
-const router = createBrowserRouter ([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
@@ -14,6 +16,10 @@ const router = createBrowserRouter ([
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "/repo/:owner/:repoName",
+        element: <RepoDetails />
       }
     ]
   }
@@ -21,6 +27,8 @@ const router = createBrowserRouter ([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </StrictMode>,
 )
