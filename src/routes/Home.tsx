@@ -58,8 +58,8 @@ const Home = () => {
             {repos.length > 0 && (
                 <>
                     <div>
-                        <label>Ordenar por:</label>
-                        <select value={sortOptions} onChange={(e) => setSortOptions(e.target.value as any)}>
+                        <label htmlFor='sort'>Ordenar por:</label>
+                        <select id='sort' value={sortOptions} onChange={(e) => setSortOptions(e.target.value as any)}>
                             <option value="stars">Estrelas</option>
                             <option value="name">Nome</option>
                             <option value="updated">Atualizações</option>
