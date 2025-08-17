@@ -32,4 +32,14 @@ describe('Search Component', () => {
 
         expect(mockSetUserName).toHaveBeenCalled();
     });
+
+    test('chama onSearch ao submeter o formulário', () => {
+        const mockOnSearch = jest.fn();
+        render(<Search userName="teste" setUserName={() => { }} onSearch={mockOnSearch} />);
+
+        const form = screen.getByRole('form');
+        fireEvent.submit(form);
+
+        expect(mockOnSearch).toHaveBeenCalled();
+    });
 });

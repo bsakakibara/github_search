@@ -63,20 +63,16 @@ describe("DataRepo Component", () => {
         expect(screen.queryByText("null")).toBeNull();
 
         // Verifica os detalhes do repositório usando função para ignorar quebras
-        expect(
-            screen.getByText((content) =>
-                content.includes("30") &&
-                content.includes("Teste Linguagem") &&
-                content.includes("Atualizado em")
-            )
-        ).toBeInTheDocument();
+        // Verifica estrelas
+        expect(screen.getByText("30")).toBeInTheDocument();
+        expect(screen.getByText("10")).toBeInTheDocument();
 
-        expect(
-            screen.getByText((content) =>
-                content.includes("10") &&
-                content.includes("Linguage Test") &&
-                content.includes("Atualizado em")
-            )
-        ).toBeInTheDocument();
+        // Verifica linguagem
+        expect(screen.getByText("Teste Linguagem")).toBeInTheDocument();
+        expect(screen.getByText("Linguage Test")).toBeInTheDocument();
+
+        // Verifica datas usando data-testid
+        expect(screen.getByTestId("updated-date-1")).toHaveTextContent("Atualizado em 16/11/2022");
+        expect(screen.getByTestId("updated-date-2")).toHaveTextContent("Atualizado em 27/12/2025");
     });
 });

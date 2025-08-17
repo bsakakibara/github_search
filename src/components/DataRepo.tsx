@@ -36,9 +36,9 @@ const DataRepo = ({ repos }: RepoListProps) => {
                                     <FontAwesomeIcon icon={faCode} className="text-green-400" />
                                     {repo.language}
                                 </span>}
-                            <span className="flex items-center gap-1">
+                            <span data-testid={`updated-date-${repo.id}`} className="flex items-center gap-1">
                                 <FontAwesomeIcon icon={faClock} className="text-blue-400" />
-                                Atualizado: {new Date(repo.updated_at).toLocaleDateString()}
+                                Atualizado em {new Date(repo.updated_at).toLocaleDateString()}
                             </span>
                         </div>
                     </Link>

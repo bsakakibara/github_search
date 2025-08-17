@@ -8,7 +8,8 @@ const mockRepo = {
     stargazers_count: 42,
     language: "TypeScript",
     html_url: "https://github.com/user/repo-teste",
-    owner: { login: "bsakakibara" }
+    owner: { login: "bsakakibara" },
+    updated_at: "2025-12-27T11:00:00Z"
 };
 
 describe("RepoDetails Component", () => {
@@ -35,8 +36,17 @@ describe("RepoDetails Component", () => {
         await waitFor(() => {
             expect(screen.getByText("repo-teste")).toBeInTheDocument();
             expect(screen.getByText("Repositório de teste")).toBeInTheDocument();
-            expect(screen.getByText(/Estrelas: 42/i)).toBeInTheDocument();
-            expect(screen.getByText(/linguagem: TypeScript/i)).toBeInTheDocument();
+            expect(screen.getByText("42")).toBeInTheDocument();
+            expect(screen.getByText("TypeScript")).toBeInTheDocument();
+            // Verifica data formatada
+            const formattedDate = new Date(mockRepo.updated_at).toLocaleDateString();
+            expect(screen.getByText(`Atualizado: ${formattedDate}`)).toBeInTheDocument();
+
+            // Link externo
+            expect(screen.getByRole("link", { name: /Visualizar no GitHub/i })).toHaveAttribute(
+                "href",
+                mockRepo.html_url
+            );
         });
     });
 

@@ -19,8 +19,9 @@ describe("DataUser Component", () => {
         expect(screen.getByRole("img")).toHaveAttribute("src", mockUser.avatar_url);
         expect(screen.getByRole("img")).toHaveAttribute("alt", mockUser.login);
 
-        expect(screen.getByText(`Localização: ${mockUser.location}`)).toBeInTheDocument();
-        expect(screen.getByText(`Email: ${mockUser.email}`)).toBeInTheDocument();
+        expect(screen.getByText(new RegExp(mockUser.location!, "i"))).toBeInTheDocument();
+        expect(screen.getByText(new RegExp(mockUser.email!, "i"))).toBeInTheDocument();
+
         expect(screen.getByText(`Bio: ${mockUser.bio}`)).toBeInTheDocument();
     });
 
@@ -37,8 +38,9 @@ describe("DataUser Component", () => {
 
         render(<DataUser {...partialUser} />);
 
-        expect(screen.queryByText(/Localização:/i)).toBeNull();
-        expect(screen.queryByText(/Email:/i)).toBeNull();
+        expect(screen.queryByText(/São Paulo/i)).toBeNull();
+        expect(screen.queryByText(/bruno.sakakibara@gmail.com/i)).toBeNull();
+
         expect(screen.queryByText(/Bio:/i)).toBeNull();
     })
 })

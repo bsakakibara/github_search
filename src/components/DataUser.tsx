@@ -39,8 +39,7 @@ const DataUser = ({
 
             {bio &&
                 <p className="mt-4 text-foreground/90 italic text-sm sm:text-base bg-background/50 px-4 py-2 rounded-lg shadow-inner">
-                    Bio:
-                    {bio}
+                    Bio: {bio}
                 </p>}
 
             <div className="grid grid-cols-2 gap-4 mt-6 w-full">
