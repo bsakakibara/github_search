@@ -1,69 +1,57 @@
-# React + TypeScript + Vite
+GitHub Search 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação desenvolvida em React + TypeScript + Vite que efetua a busca de usuários do GitHub.
+Permite pesquisar por um perfil, visualizar seus dados principais e explorar repositórios de uma forma clara e organizada, contendo filtros 
+para melhor busca e com uma interface intuitiva e de facil uso.
 
-Currently, two official plugins are available:
+Funcionalidades:
+Buscar usuários do GitHub por nome.
+Exibir detalhes do usuário (seguidores, quem segue, avatar, e-mail caso disponível).
+Lista repositórios com ordenação por nome, estrelas e data de atualização.
+Tratamentos de erros e estados de carregamento.
+Layout responsivo com suporte a dark mode.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tecnologias utilizadas:
+React 18 + hooks
+TypeScript
+Vite
+React Router DOM (para gerenciamento das rotas)
+Context API (para estado global)
+Tailwind (para estilização e responsividade)
+Jest + Testing Library (para testes automatizados)
+Fontawesome (utilizado apenas para ícones no projeto)
 
-## Expanding the ESLint configuration
+src/
+├── components/   Componentes reutilizáveis (Search, Error, DataUser, RepoDetails, etc.)
+├── context/      Context API (UserProvider, UserContext)
+├── routes/       Rotas principais da aplicação (Home, etc.)
+├── types/        Tipagens TypeScript
+├── api/          Funções de acesso à API do GitHub
+└── tests/        Testes unitários
+obs:
+Optei por utilizar a pasta routes/ no lugar de pages/ para deixar explícito que cada arquivo dentro dela representa uma rota principal da aplicação (ex: Home). Assim, a estrutura reflete melhor a responsabilidade de cada módulo e evita confusão com componentes auxiliares.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Como rodar o projeto 
+Pré requisitos
+Node.js (>=18)
+npm ou yarn
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Instalação 
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Ambiente de desenvolvimento
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Rodar Testes 
+npm test
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Testes
+Foram implementados testes unitários para os principais componente e rotas.
+Atualmente, os 22 efetuados estão aptos.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Observações
+Este projeto foi desenvolvido com foco em:
+Clareza no código (clean code e separação de responsabilidades).
+Experiencia do usuário (retorno visual em carregamentos e erros (Não utilizei setTimeout para simular carregamentos, pois optei por trabalhar diretamente com estados de loading e respostas reais da API. Isso garante feedback imediato e evita atrasos artificiais para o usuário. Caso seja necessário, a aplicação pode ser facilmente ajustada para incluir simulações de latência.)
+Escalabilidade (estrutura organizada e tipagens fortes com TypeScript)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
