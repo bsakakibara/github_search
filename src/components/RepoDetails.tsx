@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { RepoProps } from "../types/types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { faClock, faCode } from "@fortawesome/free-solid-svg-icons"
 
 const RepoDetails = () => {
     const { owner, repoName } = useParams<{ owner: string; repoName: string }>();
@@ -24,16 +27,41 @@ const RepoDetails = () => {
         fetchRepo();
     }, [owner, repoName]);
 
-    if (loading) return <p>Carregando...</p>;
-    if (error || !repo) return <p>Repositório não encontrado</p>;
+    if (loading) return <p className="text-primary text-lg font-medium animate-pulse mt-4">Carregando...</p>;
+    if (error || !repo) return <p className="text-red-500 mt-4">Repositório não encontrado</p>;
 
     return (
-        <div>
-            <h2>{repo.name}</h2>
-            {repo.description && <p>{repo.description}</p>}
-            <p>Estrelas: {repo.stargazers_count}</p>
-            {repo.language && <p>Linguagem: {repo.language}</p>}
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">Visualizar no GitHub</a>
+        <div className="w-full max-w-3xl p-6 rounded-2xl bg-white/10 dark:bg-black/20 
+        backdrop-blur-md shadow-lg border border-white/20 mt-6">
+
+            <h2 className="text-2xl font-bold text-primary mb-2">{repo.name}</h2>
+
+            {repo.description && <p className="text-foreground/80 mb-4">{repo.description}</p>}
+
+            <div className="flex flex-wrap gap-4 text-sm text-foreground/60 mb-4">
+                <span className="flex items-center gap-1">
+                    <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
+                    {repo.stargazers_count}
+                </span>
+                {repo.language &&
+                    <span className="flex items-center gap-1">
+                        <FontAwesomeIcon icon={faCode} className="text-green-400" />
+                        {repo.language}
+                    </span>}
+                <span className="flex items-center gap-1">
+                    <FontAwesomeIcon icon={faClock} className="text-blue-400" />
+                    Atualizado: {new Date(repo.updated_at).toLocaleDateString()}
+                </span>
+
+                <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-600 font-medium"
+                >
+                    Visualizar no GitHub
+                </a>
+            </div>
         </div>
     )
 }
